@@ -137,7 +137,9 @@ impl State {
     fn restart(&mut self) {
         self.player = Player::new(5, 25);
         self.frame_time = 0.0;
+        self.obstacle = Obstacle::new(SCREEN_WIDTH, 0);
         self.mode = GameMode::Playing;
+        self.score = 0
     }
 
     fn main_menu(&mut self, ctx: &mut BTerm) {
