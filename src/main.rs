@@ -32,7 +32,7 @@ impl Player {
     }
 
     fn flap(&mut self) {
-        self.velocity = -0.2
+        self.velocity = -2.0
     }
 }
 
