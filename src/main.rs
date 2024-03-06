@@ -1,3 +1,6 @@
+#![warn(clippy::all, clippy::pedantic)]
+#![allow(clippy::cast_possible_truncation)]
+
 use bracket_lib::prelude::*;
 
 struct Obstacle {
@@ -73,7 +76,7 @@ impl Player {
     }
 
     fn flap(&mut self) {
-        self.velocity = -2.0
+        self.velocity = -2.0;
     }
 }
 
@@ -126,7 +129,7 @@ impl State {
         self.obstacle.render(ctx, self.player.x);
         if self.player.x > self.obstacle.x {
             self.score += 1;
-            self.obstacle = Obstacle::new(self.player.x + SCREEN_WIDTH, self.score)
+            self.obstacle = Obstacle::new(self.player.x + SCREEN_WIDTH, self.score);
         }
 
         if self.player.y > SCREEN_HEIGHT || self.obstacle.hit_obstacle(&self.player) {
@@ -139,10 +142,10 @@ impl State {
         self.frame_time = 0.0;
         self.obstacle = Obstacle::new(SCREEN_WIDTH, 0);
         self.mode = GameMode::Playing;
-        self.score = 0
+        self.score = 0;
     }
 
-    fn main_menu(&mut self, ctx: &mut BTerm) {
+    fn main_menu(ctx: &mut BTerm) {
         ctx.cls();
         ctx.print_centered(5, "Welcom to Flappy Dragon");
         ctx.print_centered(8, "(P) Play Game");
@@ -169,7 +172,7 @@ impl State {
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
         match self.mode {
-            GameMode::Menu => self.main_menu(ctx),
+            GameMode::Menu => State::main_menu(ctx),
             GameMode::End => self.dead(ctx),
             GameMode::Playing => self.play(ctx),
         }
